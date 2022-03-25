@@ -16,10 +16,20 @@ function addStyleResource (rule) {
 }
 
 module.exports = {
-  siteName: 'Jamdocs',
-  siteUrl: 'https://jamdocs.samuelhorn.com',
+  siteName: 'Increazy Docs',
+  siteUrl: 'https://docs.increazy.com',
   templates: {
     Doc: '/:slug',
+  },
+  transformers: {
+    remark: {
+      externalLinksTarget: '_blank',
+      externalLinksRel: ['nofollow', 'noopener', 'noreferrer'],
+      anchorClassName: 'icon icon-link',
+      plugins: [
+        // ...global plugins
+      ]
+    }
   },
   plugins: [
     {
@@ -32,6 +42,13 @@ module.exports = {
             '@gridsome/remark-prismjs'
           ]
         }
+      }
+    },
+    {
+      use: `gridsome-plugin-netlify-cms`,
+      options: {
+        publicPath: `/admin`,
+        modulePath: `src/admin/index.js`
       }
     },
     {
